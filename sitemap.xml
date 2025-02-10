@@ -1,50 +1,50 @@
-﻿<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-	<url>
-		<loc>https://diamondtax.ca/</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>1.00</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/index.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/services.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/contact-us.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/personal-income-tax-returns.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/corporate-taxes.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/bookkeeping.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
-	<url>
-		<loc>https://diamondtax.ca/about-us.html</loc>
-		<lastmod>2024-06-23T23:07:06+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.80</priority>
-	</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://diamondtax.ca</loc>
+  <lastmod>2025-02-10T02:34:55+00:00</lastmod>
+  <priority>1.00</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/services</loc>
+  <lastmod>2025-02-10T02:34:56+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/about</loc>
+  <lastmod>2025-02-10T02:34:56+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/blog</loc>
+  <lastmod>2025-02-10T02:34:57+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/contact</loc>
+  <lastmod>2025-02-10T02:34:57+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/privacy-policy</loc>
+  <lastmod>2025-02-10T02:34:58+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://diamondtax.ca/DiamondTax.png</loc>
+  <lastmod>2025-02-10T02:34:55+00:00</lastmod>
+  <priority>0.3</priority>
+  <changefreq>weekly</changefreq>
+</url>
+
 </urlset>

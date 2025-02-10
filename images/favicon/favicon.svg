@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="800px" height="800px"><svg height="800px" width="800px" version="1.1" id="SvgjsSvg1099" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+
+<g id="SvgjsG1098" stroke-width="0"></g>
+
+<g id="SvgjsG1097" stroke-linecap="round" stroke-linejoin="round"></g>
+
+<g id="SvgjsG1096"> <circle style="fill:#e0ffe9;" cx="256" cy="256" r="256"></circle> <path style="fill:#d2f7dd;" d="M256,369.778l114.99,114.99c68.832-34.668,119.884-99.473,135.794-177.095L398.222,199.111 c-0.288,0-156.875,118.662-156.875,118.662L256,369.778z"></path> <g> <polygon style="fill:#B5F1F4;" points="199.111,142.222 113.778,199.111 255.857,199.111 255.857,142.222 "></polygon> <polygon style="fill:#B5F1F4;" points="312.889,142.222 255.857,142.222 255.857,199.111 398.222,199.111 "></polygon> </g> <polygon style="fill:#7BD4EF;" points="398.222,199.111 255.857,199.111 255.857,369.605 256,369.778 "></polygon> <g> <polygon style="fill:#84DBFF;" points="113.778,199.111 255.857,369.605 255.857,199.111 "></polygon> <polygon style="fill:#84DBFF;" points="312.889,199.111 256,142.222 199.111,199.111 "></polygon> </g> <polygon style="fill:#7BD4EF;" points="256,142.222 255.857,142.365 255.857,199.111 312.889,199.111 "></polygon> <polygon style="fill:#31BAFD;" points="199.111,199.111 256,369.778 312.889,199.111 "></polygon> <polygon style="fill:#2B9ED8;" points="312.889,199.111 255.857,199.111 255.857,369.349 256,369.778 "></polygon> <polygon style="fill:#31BAFD;" points="199.111,142.222 199.111,199.111 113.778,199.111 "></polygon> <polygon style="fill:#2B9ED8;" points="312.889,142.222 312.889,199.111 398.222,199.111 "></polygon> </g>
+
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

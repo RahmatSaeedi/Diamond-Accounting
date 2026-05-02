@@ -40,6 +40,42 @@
     <meta name="apple-mobile-web-app-title" content="DiamondTax" />
     <link rel="manifest" href="/images/favicon/site.webmanifest" />
 </head>
+  <script>
+$(document).ready(function() {
+  $('#email-form').submit(function(e) {
+    // 1. Prevent the default page navigation
+    e.preventDefault();
+
+    const $form = $(this);
+    const $submitBtn = $form.find('input[type="submit"]');
+    const $success = $('.contact-success-message');
+    const $error = $('.contact-error-message');
+    const action = $form.attr('action');
+
+    // Change button text to "Please wait..."
+    const originalBtnText = $submitBtn.val();
+    $submitBtn.val($submitBtn.attr('data-wait') || "Sending...");
+
+    // 2. Send the request via AJAX
+    $.ajax({
+      type: "POST",
+      url: action,
+      data: $form.serialize(),
+      success: function(response) {
+        // Hide the form and show the success message
+        $form.hide();
+        $success.show();
+        $error.hide();
+      },
+      error: function() {
+        // Show the error message
+        $error.show();
+        $submitBtn.val(originalBtnText); // Reset button
+      }
+    });
+  });
+});
+</script>
 <body>
   <div data-animation="default" class="navbar w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" data-w-id="06ab6c64-468c-b44e-1b8c-856deb96ba7f" role="banner" data-no-scroll="1" data-duration="400" data-doc-height="1">
     <a href="index.html" class="logo-link-wrapper w-nav-brand"><img width="100" height="Auto" alt="" src="images/logo.svg" loading="eager" class="logo"></a>

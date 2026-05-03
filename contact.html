@@ -26,47 +26,12 @@
         }
       });
     </script>
-  <script type="text/javascript">
-      ! function(o, c) {
-        var n = c.documentElement,
-          t = " w-mod-";
-        n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
-      }(window, document);
-
-    const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault(); // CRITICAL: This stops the "Form submission canceled" error
-  
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.innerText = "Sending...";
-
-  const formData = new FormData(contactForm);
-
-  try {
-    const response = await fetch("https://submit-form.r-saeedi.workers.dev", {
-      method: "POST",
-      body: formData, // This automatically includes the 'cf-turnstile-response'
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("Thanks! Your message has been sent.");
-      contactForm.reset();
-      // Optional: Reset Turnstile widget for next use
-      turnstile.reset(); 
-    } else {
-      alert("Error: " + result.error);
-    }
-  } catch (err) {
-    alert("Connection error. Please try again later.");
-  } finally {
-    btn.disabled = false;
-    btn.innerText = "Send Message";
-  }
-});
+    <script type="text/javascript">
+        ! function(o, c) {
+          var n = c.documentElement,
+            t = " w-mod-";
+          n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+        }(window, document);
     </script>
     <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
@@ -273,40 +238,50 @@ contactForm.addEventListener('submit', async (e) => {
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67a8ebc087b2fcd70fcbeb8a" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script>
-    $(document).ready(function() {
-    $('#email-form').submit(function(e) {
-      // 1. Prevent the default page navigation
-      e.preventDefault();
-  
-      const $form = $(this);
-      const $submitBtn = $form.find('input[type="submit"]');
-      const $success = $('.contact-success-message');
-      const $error = $('.contact-error-message');
-      const action = $form.attr('action');
-  
-      // Change button text to "Please wait..."
-      const originalBtnText = $submitBtn.val();
-      $submitBtn.val($submitBtn.attr('data-wait') || "Sending...");
-  
-      // 2. Send the request via AJAX
-      $.ajax({
-        type: "POST",
-        url: action,
-        data: $form.serialize(),
-        success: function(response) {
-          // Hide the form and show the success message
-          $form.hide();
+$(document).ready(function() {
+  $('#email-form').submit(function(e) {
+    // 1. Prevent the default Webflow/Browser behavior
+    e.preventDefault();
+    
+    const $form = $(this);
+    const $submitBtn = $form.find('input[type="submit"]');
+    const $success = $('.contact-success-message');
+    const $error = $('.contact-error-message');
+    const action = "https://submit-form.r-saeedi.workers.dev"; // Your Worker URL
+
+    // 2. Visual feedback for the user
+    const originalBtnText = $submitBtn.val();
+    $submitBtn.val($submitBtn.attr('data-wait') || "Sending...").prop('disabled', true);
+
+    // 3. Send the request
+    // $.serialize() automatically includes 'cf-turnstile-response'
+    $.ajax({
+      type: "POST",
+      url: action,
+      data: $form.serialize(), 
+      success: function(response) {
+        // Hide form, show success
+        $form.fadeOut(300, function() {
           $success.show();
-          $error.hide();
-        },
-        error: function() {
-          // Show the error message
-          $error.show();
-          $submitBtn.val(originalBtnText); // Reset button
+        });
+        $error.hide();
+      },
+      error: function(xhr) {
+        // Handle specific error from Worker if available
+        const errorMsg = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Something went wrong.";
+        alert(errorMsg);
+        
+        $error.show();
+        $submitBtn.val(originalBtnText).prop('disabled', false);
+        
+        // Reset turnstile so they can try again
+        if (typeof turnstile !== 'undefined') {
+          turnstile.reset();
         }
-      });
+      }
     });
   });
+});
 </script>
 </body>
 </html>

@@ -100,6 +100,7 @@
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
           <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection" data-sitekey="0x4AAAAAADIgv-SzBcp5dPm6"></div>
           <span class="err" id="cf-ts-err"></span>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send my request</button>
           <p class="disclaimer" style="margin-top:1rem;text-align:center">We typically reply within one business day. Your details are never shared.</p>
         </form>
@@ -161,6 +162,8 @@
   .form-success[hidden] { display: none; }
   .cf-widget { margin: .2rem 0 1rem; min-height: 0; }
   .cf-widget:empty { margin: 0; }
+  .form-error { background: oklch(0.96 0.05 25); color: oklch(0.45 0.16 25); border-radius: var(--r-sm); padding: .8rem 1rem; font-size: .9rem; margin: 0 0 1rem; line-height: 1.5; }
+  .form-error[hidden] { display: none; }
   .success-ico { width: 64px; height: 64px; border-radius: 50%; background: var(--positive-bg); color: var(--positive); display: grid; place-items: center; margin-bottom: 1.2rem; }
   .success-ico svg { width: 32px; height: 32px; }
   .form-success p { max-width: 36ch; color: var(--ink-soft); }
@@ -195,6 +198,11 @@
     //  2) TURNSTILE_SITEKEY — your Cloudflare Turnstile *site* key (public,
     //     safe to expose here). Leave as-is to hide the widget during dev.
     var TURNSTILE_SITEKEY = "YOUR_TURNSTILE_SITE_KEY";
+    //  3) PAYLOAD_FORMAT — how your Worker reads the request body:
+    //     "form" = application/x-www-form-urlencoded (what a normal HTML <form>
+    //              sends; matches Workers using `await request.formData()`).
+    //     "json" = application/json (Workers using `await request.json()`).
+    var PAYLOAD_FORMAT = "form";
     // ============================================================
 
     var form = document.getElementById("contact-form");
@@ -253,6 +261,16 @@
     }
 
     function showSuccess() { success.hidden = false; }
+    var formError = document.getElementById("form-error");
+    function resetBtn() {
+      var b = form.querySelector("button[type=submit]");
+      b.disabled = false; b.textContent = "Send my request";
+    }
+    function showError() {
+      resetBtn(); tsReset();
+      formError.hidden = false;
+      formError.innerHTML = "Sorry — we couldn't send your message just now. Please call <a href=\"tel:+15875578400\">(587) 557‑8400</a> or email <a href=\"mailto:hello@diamondtax.ca\">hello@diamondtax.ca</a> and we'll take care of it.";
+    }
     function mailtoFallback(data) {
       var subject = encodeURIComponent("Quote request — " + (data.name || "Website"));
       var body = encodeURIComponent(
@@ -264,7 +282,7 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (form._gotcha && form._gotcha.value) return; // honeypot
-      tsErr.textContent = "";
+      tsErr.textContent = ""; formError.hidden = true;
       // normalize fields before sending
       if (nameEl.value.trim()) nameEl.value = formatName(nameEl.value);
       if (phoneEl.value.trim()) phoneEl.value = formatPhone(phoneEl.value);
@@ -273,31 +291,35 @@
       var token = tsToken();
       if (tsEnabled() && !token) { tsErr.textContent = "Please complete the spam check above."; return; }
 
+      // Clean payload — only include the Turnstile token when one exists.
       var data = {
         name: form.name.value.trim(), email: form.email.value.trim(),
-        phone: form.phone.value.trim(), service: form.service.value, message: form.message.value.trim(),
-        "cf-turnstile-response": token, _source: "diamondtax.ca contact form"
+        phone: form.phone.value.trim(), service: form.service.value, message: form.message.value.trim()
       };
+      if (token) data["cf-turnstile-response"] = token;
+
       var btn = form.querySelector("button[type=submit]");
       btn.disabled = true; btn.textContent = "Sending…";
 
       if (CONTACT_ENDPOINT.indexOf("your-endpoint.example.com") !== -1) {
-        // Endpoint not configured yet — fall back to the visitor's email app.
-        mailtoFallback(data);
-        setTimeout(showSuccess, 400);
+        // Endpoint not configured — fall back to the visitor's email app.
+        mailtoFallback(data); setTimeout(showSuccess, 400);
         return;
       }
 
-      fetch(CONTACT_ENDPOINT, {
-        method: "POST",
-        headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }).then(function (r) {
+      var opts = { method: "POST", headers: { "Accept": "application/json" } };
+      if (PAYLOAD_FORMAT === "json") {
+        opts.headers["Content-Type"] = "application/json";
+        opts.body = JSON.stringify(data);
+      } else {
+        // application/x-www-form-urlencoded (URLSearchParams sets the header)
+        opts.body = new URLSearchParams(data);
+      }
+      fetch(CONTACT_ENDPOINT, opts).then(function (r) {
         if (r.ok) showSuccess();
-        else throw new Error("status " + r.status);
+        else showError();
       }).catch(function () {
-        // Network/endpoint error — fall back to the visitor's email app.
-        tsReset(); mailtoFallback(data); showSuccess();
+        showError();
       });
     });
   })();

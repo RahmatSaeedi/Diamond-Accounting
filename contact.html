@@ -98,7 +98,7 @@
           </div>
           <!-- honeypot -->
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-          <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection"></div>
+          <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection" data-sitekey="0x4AAAAAADIgv-SzBcp5dPm6"></div>
           <span class="err" id="cf-ts-err"></span>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send my request</button>
           <p class="disclaimer" style="margin-top:1rem;text-align:center">We typically reply within one business day. Your details are never shared.</p>
@@ -191,7 +191,7 @@
     //     MUST verify the Cloudflare Turnstile token server-side using your
     //     Turnstile *secret* key. Until set, the form falls back to opening
     //     the visitor's email app to hello@diamondtax.ca.
-    var CONTACT_ENDPOINT = "https://your-endpoint.example.com/contact";
+    var CONTACT_ENDPOINT = "https://submit-form.r-saeedi.workers.dev/";
     //  2) TURNSTILE_SITEKEY — your Cloudflare Turnstile *site* key (public,
     //     safe to expose here). Leave as-is to hide the widget during dev.
     var TURNSTILE_SITEKEY = "YOUR_TURNSTILE_SITE_KEY";
@@ -276,7 +276,7 @@
       var data = {
         name: form.name.value.trim(), email: form.email.value.trim(),
         phone: form.phone.value.trim(), service: form.service.value, message: form.message.value.trim(),
-        "cf-turnstile-response": token
+        "cf-turnstile-response": token, _source: "diamondtax.ca contact form"
       };
       var btn = form.querySelector("button[type=submit]");
       btn.disabled = true; btn.textContent = "Sending…";
@@ -287,16 +287,17 @@
         setTimeout(showSuccess, 400);
         return;
       }
+
       fetch(CONTACT_ENDPOINT, {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify(data)
       }).then(function (r) {
         if (r.ok) showSuccess();
-        else throw new Error("bad response");
+        else throw new Error("status " + r.status);
       }).catch(function () {
-        tsReset();
-        mailtoFallback(data); showSuccess();
+        // Network/endpoint error — fall back to the visitor's email app.
+        tsReset(); mailtoFallback(data); showSuccess();
       });
     });
   })();

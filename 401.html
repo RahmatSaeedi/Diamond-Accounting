@@ -1,182 +1,73 @@
-/* ============================================================
-   Diamond Tax — Interactive Calculators
-   Requires tax-data.js (window.TaxData)
-   ============================================================ */
-(function () {
-  "use strict";
-  var T = window.TaxData, money = T.money, pct = T.pct;
-  var $ = function (s, c) { return (c || document).querySelector(s); };
-  function parseNum(v) { return Math.max(0, parseInt(String(v).replace(/[^0-9]/g, ""), 10) || 0); }
-  function fmtInput(el) { el.value = parseNum(el.value).toLocaleString("en-CA"); }
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Access Denied (401) | Diamond Tax & Accounting</title>
+<meta name="description" content="You need to be authorized to view this page. Return to the Diamond Tax & Accounting homepage or contact us for help.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1a5854">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
 
-  /* ---------- TAB SWITCHING ---------- */
-  function initTabs() {
-    var tabs = document.querySelectorAll(".calc-tab");
-    var panels = document.querySelectorAll(".calc-panel");
-    tabs.forEach(function (t) {
-      t.addEventListener("click", function () {
-        tabs.forEach(function (x) { x.classList.remove("active"); x.setAttribute("aria-selected", "false"); });
-        panels.forEach(function (p) { p.hidden = true; });
-        t.classList.add("active"); t.setAttribute("aria-selected", "true");
-        var panel = document.getElementById(t.getAttribute("aria-controls"));
-        if (panel) panel.hidden = false;
-        if (location.hash !== "#" + t.dataset.tab) history.replaceState(null, "", "#" + t.dataset.tab);
-      });
-    });
-    // open from hash
-    if (location.hash) {
-      var match = [].find.call(tabs, function (t) { return "#" + t.dataset.tab === location.hash; });
-      if (match) match.click();
-    }
-  }
+<main>
+  <section class="error-hero">
+    <div class="wrap error-wrap">
+      <div class="error-mark" aria-hidden="true">
+        <span class="error-code">4</span>
+        <svg class="error-diamond" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="0">
+          <polygon points="30,46 90,46 76,31 44,31" fill="#1f6b66"/>
+          <polygon points="60,46 44,31 76,31" fill="#2a807a"/>
+          <polygon points="44,31 76,31 69,38 51,38" fill="#caa44a"/>
+          <polygon points="30,46 90,46 60,104" fill="#1a5854"/>
+          <polygon points="44,46 76,46 60,104" fill="#26736d"/>
+          <polygon points="60,46 90,46 60,104" fill="#164e4a"/>
+          <polygon points="51,46 69,46 60,74" fill="#2f8a83"/>
+        </svg>
+        <span class="error-code">1</span>
+      </div>
+      <span class="badge gold" style="margin-bottom:1rem">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Restricted area
+      </span>
+      <h1>You don't have access to this page</h1>
+      <p class="lede maxw-680 mx-auto">This page requires authorization, or your session may have expired. If you believe you should have access, get in touch and we'll sort it out quickly.</p>
+      <div class="error-cta">
+        <a class="btn btn-primary btn-lg" href="index.html">Back to home</a>
+        <a class="btn btn-outline btn-lg" href="contact.html">Contact us</a>
+      </div>
 
-  /* ---------- 1. INCOME TAX & TAKE-HOME ---------- */
-  function initIncome() {
-    var root = $("#calc-income"); if (!root) return;
-    var income = $("#it-income", root), range = $("#it-range", root),
-        year = $("#it-year", root), rrsp = $("#it-rrsp", root),
-        ded = $("#it-ded", root), self = $("#it-self", root);
+      <div class="error-help">
+        <p class="mb-0">Need a hand? Call <a href="tel:+15875578400">(587) 557‑8400</a> or email <a href="mailto:hello@diamondtax.ca">hello@diamondtax.ca</a> — we're open 7 days a week, 8 AM–9 PM.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
-    function run() {
-      var r = T.estimate({
-        income: parseNum(income.value), year: +year.value,
-        rrsp: parseNum(rrsp.value), deductions: parseNum(ded.value),
-        selfEmployed: self.checked
-      });
-      $("#it-net", root).textContent = money(r.net);
-      $("#it-net-mo", root).textContent = money(r.net / 12) + " / month";
-      $("#it-fed", root).textContent = money(r.fedTax);
-      $("#it-ab", root).textContent = money(r.abTax);
-      $("#it-cpp", root).textContent = money(r.cpp);
-      $("#it-ei", root).textContent = money(r.ei);
-      $("#it-totaltax", root).textContent = money(r.totalDeductions);
-      $("#it-avg", root).textContent = pct(r.avgRate);
-      $("#it-marg", root).textContent = pct(r.marginalCombined);
-      $("#it-taxable", root).textContent = money(r.taxable);
-      self.checked ? self.closest(".calc-field").classList.add("on") : self.closest(".calc-field").classList.remove("on");
-      $("#it-ei-row", root).style.opacity = self.checked ? ".4" : "1";
-      // stacked bar
-      var segs = [["Net pay", r.net, "var(--teal-600)"], ["Federal tax", r.fedTax, "var(--gold-500)"], ["Alberta tax", r.abTax, "var(--gold-400)"], ["CPP", r.cpp, "var(--teal-800)"], ["EI", r.ei, "var(--teal-400, #7fb5af)"]];
-      var total = r.income || 1;
-      $("#it-bar", root).innerHTML = segs.filter(function (s) { return s[1] > 0; }).map(function (s) {
-        return '<span title="' + s[0] + ' ' + money(s[1]) + '" style="flex:' + (s[1] / total * 100) + ';background:' + s[2] + '"></span>';
-      }).join("");
-    }
-    income.addEventListener("input", function () { var v = parseNum(income.value); range.value = Math.min(+range.max, Math.max(+range.min, v)); run(); });
-    income.addEventListener("blur", function () { fmtInput(income); });
-    range.addEventListener("input", function () { income.value = parseNum(range.value).toLocaleString("en-CA"); run(); });
-    [year, rrsp, ded, self].forEach(function (el) {
-      el.addEventListener("input", run); el.addEventListener("change", run);
-    });
-    [rrsp, ded].forEach(function (el) { el.addEventListener("blur", function () { fmtInput(el); }); });
-    run();
-  }
+<div id="site-footer"></div>
 
-  /* ---------- 2. RRSP SAVINGS ---------- */
-  function initRrsp() {
-    var root = $("#calc-rrsp"); if (!root) return;
-    var income = $("#rr-income", root), contrib = $("#rr-contrib", root),
-        crange = $("#rr-range", root), year = $("#rr-year", root);
-    function run() {
-      var inc = parseNum(income.value), c = parseNum(contrib.value), y = +year.value;
-      var before = T.estimate({ income: inc, year: y });
-      var after = T.estimate({ income: inc, rrsp: c, year: y });
-      var saved = before.incomeTax - after.incomeTax;
-      var room = Math.round(Math.min(inc * 0.18, T.LIMITS[y].rrspDollar));
-      $("#rr-saved", root).textContent = money(saved);
-      $("#rr-marg", root).textContent = pct(before.marginalCombined);
-      $("#rr-net-cost", root).textContent = money(c - saved);
-      $("#rr-room", root).textContent = money(room);
-      $("#rr-eff", root).textContent = c > 0 ? pct(saved / c) : "0%";
-      var over = c > room;
-      $("#rr-warn", root).style.display = over ? "flex" : "none";
-    }
-    [income, contrib, year].forEach(function (el) { el.addEventListener("input", run); el.addEventListener("change", run); });
-    contrib.addEventListener("input", function () { crange.value = Math.min(+crange.max, parseNum(contrib.value)); run(); });
-    crange.addEventListener("input", function () { contrib.value = parseNum(crange.value).toLocaleString("en-CA"); run(); });
-    [income, contrib].forEach(function (el) { el.addEventListener("blur", function () { fmtInput(el); }); });
-    run();
-  }
+<style>
+  .error-hero { padding: clamp(48px, 8vw, 110px) 0; text-align: center; background: linear-gradient(180deg, var(--teal-50), transparent); }
+  .error-wrap { max-width: 760px; margin: 0 auto; }
+  .error-mark { display: flex; align-items: center; justify-content: center; gap: .1em; margin-bottom: 1.4rem; }
+  .error-code { font-family: var(--serif); font-weight: 800; font-size: clamp(5rem, 16vw, 9rem); line-height: 1; color: var(--teal-800); letter-spacing: -.04em; }
+  .error-diamond { width: clamp(4.6rem, 15vw, 8.4rem); height: clamp(4.6rem, 15vw, 8.4rem); margin: 0 -.05em; }
+  .error-cta { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; margin: 1.8rem 0 0; }
+  .error-help { margin-top: 2.4rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.2rem 1.5rem; box-shadow: var(--shadow-sm); }
+  .error-help p { font-size: .98rem; color: var(--ink-soft); }
+  .error-help a { font-weight: 600; }
+</style>
 
-  /* ---------- 3. SELF-EMPLOYED ---------- */
-  function initSelf() {
-    var root = $("#calc-self"); if (!root) return;
-    var rev = $("#se-rev", root), exp = $("#se-exp", root), year = $("#se-year", root);
-    function run() {
-      var revenue = parseNum(rev.value), expenses = parseNum(exp.value), y = +year.value;
-      var net = Math.max(0, revenue - expenses);
-      var r = T.estimate({ income: net, year: y, selfEmployed: true });
-      $("#se-net-income", root).textContent = money(net);
-      $("#se-incometax", root).textContent = money(r.incomeTax);
-      $("#se-cpp", root).textContent = money(r.cpp);
-      $("#se-total", root).textContent = money(r.incomeTax + r.cpp);
-      $("#se-aftertax", root).textContent = money(net - r.incomeTax - r.cpp);
-      $("#se-setaside", root).textContent = pct((r.incomeTax + r.cpp) / (net || 1));
-      var gstReq = revenue > 30000;
-      $("#se-gst", root).innerHTML = gstReq
-        ? '<strong style="color:var(--warn)">Yes — you must register.</strong> Revenue over $30,000 means GST/HST registration is required. We can set this up for you.'
-        : 'Not required yet. Registration becomes mandatory once revenue passes <strong>$30,000</strong> in four consecutive quarters.';
-    }
-    [rev, exp, year].forEach(function (el) { el.addEventListener("input", run); el.addEventListener("change", run); });
-    [rev, exp].forEach(function (el) { el.addEventListener("blur", function () { fmtInput(el); }); });
-    run();
-  }
-
-  /* ---------- 4. GST CALCULATOR ---------- */
-  function initGst() {
-    var root = $("#calc-gst"); if (!root) return;
-    var amt = $("#gst-amt", root), mode = root.querySelectorAll("input[name=gst-mode]");
-    function run() {
-      var a = parseFloat(String(amt.value).replace(/[^0-9.]/g, "")) || 0;
-      var adding = root.querySelector("input[name=gst-mode]:checked").value === "add";
-      var base, gst, total;
-      if (adding) { base = a; gst = a * 0.05; total = a * 1.05; }
-      else { total = a; base = a / 1.05; gst = total - base; }
-      $("#gst-base", root).textContent = money(base, 2);
-      $("#gst-gst", root).textContent = money(gst, 2);
-      $("#gst-total", root).textContent = money(total, 2);
-    }
-    amt.addEventListener("input", run);
-    mode.forEach(function (m) { m.addEventListener("change", run); });
-    run();
-  }
-
-  /* ---------- 5. MARGINAL RATE LOOKUP ---------- */
-  function initMarginal() {
-    var root = $("#calc-marginal"); if (!root) return;
-    var income = $("#mr-income", root), year = $("#mr-year", root);
-    function run() {
-      var inc = parseNum(income.value), y = +year.value;
-      var fed = T.FED[y], ab = T.AB[y];
-      // combined marginal at this income
-      var r = T.estimate({ income: inc, year: y });
-      $("#mr-marg", root).textContent = pct(r.marginalCombined);
-      $("#mr-avg", root).textContent = pct(r.avgTaxRate);
-      $("#mr-tax", root).textContent = money(r.incomeTax);
-      // build combined bracket table — merge thresholds
-      var pts = new Set([0]);
-      fed.brackets.forEach(function (b) { if (b[0] !== Infinity) pts.add(b[0]); });
-      ab.brackets.forEach(function (b) { if (b[0] !== Infinity) pts.add(b[0]); });
-      var arr = Array.from(pts).sort(function (a, b) { return a - b; });
-      var rows = "";
-      for (var i = 0; i < arr.length; i++) {
-        var lo = arr[i], hi = arr[i + 1] || Infinity;
-        var mid = lo + 1;
-        var fr = T.marginalRate(mid, fed.brackets), ar = T.marginalRate(mid, ab.brackets);
-        var here = inc > lo && inc <= hi;
-        rows += '<tr' + (here ? ' class="here"' : '') + '><td>' + money(lo) + (hi === Infinity ? ' +' : ' – ' + money(hi)) + '</td>' +
-          '<td class="num">' + pct(fr, 1) + '</td><td class="num">' + pct(ar, 1) + '</td>' +
-          '<td class="num"><span class="rate-pill">' + pct(fr + ar, 1) + '</span></td>' +
-          '<td>' + (here ? '<span class="badge new">You are here</span>' : '') + '</td></tr>';
-      }
-      $("#mr-tbody", root).innerHTML = rows;
-    }
-    [income, year].forEach(function (el) { el.addEventListener("input", run); el.addEventListener("change", run); });
-    income.addEventListener("blur", function () { fmtInput(income); });
-    run();
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    initTabs(); initIncome(); initRrsp(); initSelf(); initGst(); initMarginal();
-  });
-})();
+<script src="js/partials.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

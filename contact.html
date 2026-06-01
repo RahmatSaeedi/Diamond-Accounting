@@ -96,8 +96,6 @@
             <textarea id="cf-message" name="message" rows="5" required placeholder="A few details about what you're looking for…"></textarea>
             <span class="err" data-err="cf-message"></span>
           </div>
-          <!-- honeypot -->
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
           <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection"></div>
           <span class="err" id="cf-ts-err"></span>
           <p class="form-error" id="form-error" role="alert" hidden></p>
@@ -164,6 +162,8 @@
   .cf-widget:empty { margin: 0; }
   .form-error { background: oklch(0.96 0.05 25); color: oklch(0.45 0.16 25); border-radius: var(--r-sm); padding: .8rem 1rem; font-size: .9rem; margin: 0 0 1rem; line-height: 1.5; }
   .form-error[hidden] { display: none; }
+  .form-error.info { background: var(--teal-50); color: var(--teal-900); }
+  .form-error a { font-weight: 700; text-decoration: underline; }
   .success-ico { width: 64px; height: 64px; border-radius: 50%; background: var(--positive-bg); color: var(--positive); display: grid; place-items: center; margin-bottom: 1.2rem; }
   .success-ico svg { width: 32px; height: 32px; }
   .form-success p { max-width: 36ch; color: var(--ink-soft); }
@@ -254,27 +254,38 @@
       else { el.classList.remove("invalid"); if (slot) slot.textContent = ""; }
     }
     function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    // Returns the first invalid field element, or null if everything is valid.
     function validate() {
-      var ok = true;
+      var first = null;
       var name = document.getElementById("cf-name"),
           email = document.getElementById("cf-email"),
           msg = document.getElementById("cf-message");
-      if (!name.value.trim()) { setErr("cf-name", "Please enter your name."); ok = false; } else setErr("cf-name");
-      if (!validEmail(email.value.trim())) { setErr("cf-email", "Please enter a valid email."); ok = false; } else setErr("cf-email");
-      if (!msg.value.trim()) { setErr("cf-message", "Please add a few details."); ok = false; } else setErr("cf-message");
-      return ok;
+      if (!name.value.trim()) { setErr("cf-name", "Please enter your name."); first = first || name; } else setErr("cf-name");
+      if (!email.value.trim()) { setErr("cf-email", "Please enter your email address."); first = first || email; }
+      else if (!validEmail(email.value.trim())) { setErr("cf-email", "That email doesn’t look right — please check it."); first = first || email; }
+      else setErr("cf-email");
+      if (!msg.value.trim()) { setErr("cf-message", "Please tell us a little about what you need."); first = first || msg; } else setErr("cf-message");
+      return first;
     }
+    // Clear a field's error as the visitor corrects it.
+    ["cf-name", "cf-email", "cf-message"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", function () { setErr(id); });
+    });
 
     function showSuccess() { success.hidden = false; }
     var formError = document.getElementById("form-error");
+    function showFormMessage(html, type) {
+      formError.className = "form-error" + (type === "info" ? " info" : "");
+      formError.innerHTML = html;
+      formError.hidden = false;
+    }
     function resetBtn() {
       var b = form.querySelector("button[type=submit]");
       b.disabled = false; b.textContent = "Send my request";
     }
     function showError() {
       resetBtn(); tsReset();
-      formError.hidden = false;
-      formError.innerHTML = "Sorry — we couldn't send your message just now. Please call <a href=\"tel:+15875578400\">(587) 557‑8400</a> or email <a href=\"mailto:hello@diamondtax.ca\">hello@diamondtax.ca</a> and we'll take care of it.";
+      showFormMessage("Sorry — we couldn’t send your message just now. Please call <a href=\"tel:+15875578400\">(587) 557‑8400</a> or email <a href=\"mailto:hello@diamondtax.ca\">hello@diamondtax.ca</a> and we’ll take care of it.", "error");
     }
     function mailtoFallback(data) {
       var subject = encodeURIComponent("Quote request — " + (data.name || "Website"));
@@ -286,15 +297,25 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (form._gotcha && form._gotcha.value) return; // honeypot
       tsErr.textContent = ""; formError.hidden = true;
       // normalize fields before sending
       if (nameEl.value.trim()) nameEl.value = formatName(nameEl.value);
       if (phoneEl.value.trim()) phoneEl.value = formatPhone(phoneEl.value);
-      if (!validate()) return;
+
+      var firstInvalid = validate();
+      if (firstInvalid) {
+        showFormMessage("Please check the highlighted fields below and try again.", "error");
+        try { firstInvalid.focus(); } catch (_) {}
+        return;
+      }
 
       var token = tsToken();
-      if (tsEnabled() && !token) { tsErr.textContent = "Please complete the spam check above."; return; }
+      if (tsEnabled() && !token) {
+        showFormMessage(tsRendered
+          ? "Almost there — please complete the “I’m not a robot” check below, then tap Send again."
+          : "Just a moment — the security check is still loading. Please tap Send again in a few seconds.", "info");
+        return;
+      }
 
       // Clean payload — only include the Turnstile token when one exists.
       var data = {

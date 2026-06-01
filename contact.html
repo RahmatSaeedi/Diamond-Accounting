@@ -98,7 +98,7 @@
           </div>
           <!-- honeypot -->
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-          <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection" data-sitekey="0x4AAAAAADIgv-SzBcp5dPm6"></div>
+          <div id="cf-turnstile" class="cf-widget" aria-label="Spam protection"></div>
           <span class="err" id="cf-ts-err"></span>
           <p class="form-error" id="form-error" role="alert" hidden></p>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send my request</button>
@@ -214,7 +214,12 @@
     function tsEnabled() { return TURNSTILE_SITEKEY.indexOf("YOUR_") === -1; }
     function renderTurnstile() {
       if (tsRendered || !tsEnabled() || !window.turnstile) return;
-      widgetId = window.turnstile.render("#cf-turnstile", { sitekey: TURNSTILE_SITEKEY, theme: "auto" });
+      widgetId = window.turnstile.render("#cf-turnstile", {
+        sitekey: TURNSTILE_SITEKEY, theme: "auto",
+        callback: function () { tsErr.textContent = ""; },
+        "expired-callback": function () { if (window.turnstile) window.turnstile.reset(widgetId); },
+        "error-callback": function () { return true; }
+      });
       tsRendered = true;
     }
     function tsToken() { return (tsRendered && window.turnstile) ? (window.turnstile.getResponse(widgetId) || "") : ""; }

@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diamond Tax">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1c4f4a"></stop><stop offset="1" stop-color="#123734"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"></rect>
+  
+  <polygon points="32,21.5 22,30 42,30" fill="#3a948d"></polygon>
+  <polygon points="22,30 42,30 32,55 " fill="#2f8a83"></polygon>
+  <polygon points="42,30 32,55 32,30" fill="#1f6b66"></polygon>
+  
+  <polygon points="26,25.5 38,25.5 42,30 22,30" fill="#caa44a"></polygon>
+  <polygon points="32,21.5 26,25.5 38,25.5" fill="#3a948d"></polygon>
+  
+  <polygon points="32,21.5 26,25.5 22,30 32,55 42,30 38,25.5" fill="none" stroke="#e0c074" stroke-width="1.4"></polygon>
+</svg>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Diamond Income Tax & Accounting Services">
+<meta name="geo.region" content="CA-AB">
+<meta name="geo.placename" content="Edmonton, Alberta">
+<meta name="geo.position" content="53.6305;-113.4687">
+<meta name="ICBM" content="53.6305, -113.4687">
+<meta property="og:locale" content="en_CA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Alberta Tax Calculators 2025 & 2026 | Income Tax, Take-Home, RRSP | Diamond Tax</title>
+<meta name="description" content="Free Alberta tax calculators for 2025 & 2026: income tax & take-home pay estimator, RRSP tax-savings calculator, self-employed tax estimator, GST calculator and marginal tax-rate lookup. Built with current CRA & Alberta rates.">
+<meta name="keywords" content="Alberta income tax calculator 2026, take home pay calculator Alberta, RRSP tax savings calculator, self employed tax Alberta, GST calculator Canada, marginal tax rate Alberta">
+<link rel="canonical" href="https://diamondtax.ca/calculators.html">
+<meta name="theme-color" content="#1a5854">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alberta Tax Calculators 2025 & 2026 | Diamond Tax">
+<meta property="og:description" content="Free, accurate Alberta tax calculators: income tax, take-home pay, RRSP savings, self-employed tax, GST and marginal rate lookup.">
+<meta property="og:url" content="https://diamondtax.ca/calculators.html">
+<meta property="og:image" content="https://diamondtax.ca/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Diamond Tax — Alberta Tax Calculators",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+  "description": "Free Alberta & federal tax calculators for 2025 and 2026, including income tax, take-home pay, RRSP savings, self-employed tax, GST and marginal rate tools.",
+  "provider": { "@type": "AccountingService", "name": "Diamond Income Tax & Accounting Services", "telephone": "+1-587-557-8400" }
+}
+</script>
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <!-- page hero -->
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>/</span> Calculators</nav>
+      <span class="kicker">Free tools · Alberta 2025 &amp; 2026</span>
+      <h1>Alberta tax calculators</h1>
+      <p class="lede maxw-680">Estimate your tax, take‑home pay and savings in seconds using current Alberta and federal rates. Then talk to us to turn an estimate into the real, maximized result.</p>
+    </div>
+  </section>
+
+  <!-- tabs -->
+  <section class="wrap" style="margin-top:-8px">
+    <div class="calc-tabs" role="tablist" aria-label="Calculators">
+      <button class="calc-tab active" role="tab" aria-selected="true" data-tab="income" aria-controls="calc-income" id="tab-income">Income Tax &amp; Take‑Home</button>
+      <button class="calc-tab" role="tab" aria-selected="false" data-tab="rrsp" aria-controls="calc-rrsp" id="tab-rrsp">RRSP Savings</button>
+      <button class="calc-tab" role="tab" aria-selected="false" data-tab="self" aria-controls="calc-self" id="tab-self">Self‑Employed</button>
+      <button class="calc-tab" role="tab" aria-selected="false" data-tab="gst" aria-controls="calc-gst" id="tab-gst">GST</button>
+      <button class="calc-tab" role="tab" aria-selected="false" data-tab="marginal" aria-controls="calc-marginal" id="tab-marginal">Marginal Rate</button>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(56px,8vw,100px)">
+
+    <!-- 1. INCOME TAX -->
+    <div class="calc-panel" id="calc-income" role="tabpanel" aria-labelledby="tab-income">
+      <div class="calc-shell">
+        <form class="calc-inputs" onsubmit="return false">
+          <h2 class="calc-h">Income tax &amp; take‑home pay</h2>
+          <p class="calc-sub">For employment income earned in Alberta.</p>
+          <div class="calc-field">
+            <label for="it-income">Annual income</label>
+            <div class="money-input"><span>$</span><input type="text" id="it-income" inputmode="numeric" value="85,000"></div>
+            <input type="range" id="it-range" min="15000" max="350000" step="1000" value="85000" class="slider">
+          </div>
+          <div class="calc-field">
+            <label for="it-year">Tax year</label>
+            <div class="seg" role="group">
+              <select id="it-year" class="select"><option value="2026">2026</option><option value="2025">2025</option></select>
+            </div>
+          </div>
+          <div class="field-2">
+            <div class="calc-field">
+              <label for="it-rrsp">RRSP deduction</label>
+              <div class="money-input"><span>$</span><input type="text" id="it-rrsp" inputmode="numeric" value="0"></div>
+            </div>
+            <div class="calc-field">
+              <label for="it-ded">Other deductions</label>
+              <div class="money-input"><span>$</span><input type="text" id="it-ded" inputmode="numeric" value="0"></div>
+            </div>
+          </div>
+          <label class="calc-check calc-field"><input type="checkbox" id="it-self"> <span>I'm self‑employed (pay both CPP portions, no EI)</span></label>
+          <p class="disclaimer">Taxable income: <strong id="it-taxable">$85,000</strong>. Estimate applies the basic personal amount only.</p>
+        </form>
+
+        <div class="calc-output">
+          <div class="result-hero">
+            <span class="result-label">Estimated take‑home</span>
+            <div class="result-big" id="it-net">$66,000</div>
+            <div class="result-mo" id="it-net-mo">$5,500 / month</div>
+          </div>
+          <div class="result-bar" id="it-bar"></div>
+          <div class="result-rows">
+            <div class="rr"><span>Federal tax</span><b id="it-fed">$0</b></div>
+            <div class="rr"><span>Alberta tax</span><b id="it-ab">$0</b></div>
+            <div class="rr"><span>CPP contributions</span><b id="it-cpp">$0</b></div>
+            <div class="rr" id="it-ei-row"><span>EI premiums</span><b id="it-ei">$0</b></div>
+            <div class="rr total"><span>Total tax, CPP &amp; EI</span><b id="it-totaltax">$0</b></div>
+          </div>
+          <div class="result-meta">
+            <div><span>Average rate</span><b id="it-avg">0%</b></div>
+            <div><span>Marginal rate</span><b id="it-marg">0%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. RRSP -->
+    <div class="calc-panel" id="calc-rrsp" role="tabpanel" aria-labelledby="tab-rrsp" hidden>
+      <div class="calc-shell">
+        <form class="calc-inputs" onsubmit="return false">
+          <h2 class="calc-h">RRSP tax savings</h2>
+          <p class="calc-sub">See how much an RRSP contribution cuts your tax bill.</p>
+          <div class="calc-field">
+            <label for="rr-income">Annual income</label>
+            <div class="money-input"><span>$</span><input type="text" id="rr-income" inputmode="numeric" value="95,000"></div>
+          </div>
+          <div class="calc-field">
+            <label for="rr-contrib">RRSP contribution</label>
+            <div class="money-input"><span>$</span><input type="text" id="rr-contrib" inputmode="numeric" value="10,000"></div>
+            <input type="range" id="rr-range" min="0" max="33810" step="500" value="10000" class="slider">
+          </div>
+          <div class="calc-field">
+            <label for="rr-year">Tax year</label>
+            <select id="rr-year" class="select"><option value="2026">2026</option><option value="2025">2025</option></select>
+          </div>
+          <div class="warn-note" id="rr-warn" style="display:none">⚠ Contribution exceeds your estimated annual room — unused room carries forward, but over‑contributing past your limit can be penalized.</div>
+        </form>
+        <div class="calc-output">
+          <div class="result-hero gold">
+            <span class="result-label">Estimated tax saved</span>
+            <div class="result-big" id="rr-saved">$0</div>
+            <div class="result-mo">back at refund time</div>
+          </div>
+          <div class="result-rows">
+            <div class="rr"><span>Your marginal rate</span><b id="rr-marg">0%</b></div>
+            <div class="rr"><span>Effective "discount" on contribution</span><b id="rr-eff">0%</b></div>
+            <div class="rr"><span>Net cost after refund</span><b id="rr-net-cost">$0</b></div>
+            <div class="rr total"><span>Est. annual RRSP room (18%)</span><b id="rr-room">$0</b></div>
+          </div>
+          <p class="disclaimer">Room also depends on pension adjustments and carry‑forward. We confirm your exact limit from your CRA account.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. SELF-EMPLOYED -->
+    <div class="calc-panel" id="calc-self" role="tabpanel" aria-labelledby="tab-self" hidden>
+      <div class="calc-shell">
+        <form class="calc-inputs" onsubmit="return false">
+          <h2 class="calc-h">Self‑employed tax estimator</h2>
+          <p class="calc-sub">For sole proprietors &amp; contractors — how much to set aside.</p>
+          <div class="calc-field">
+            <label for="se-rev">Gross business revenue</label>
+            <div class="money-input"><span>$</span><input type="text" id="se-rev" inputmode="numeric" value="90,000"></div>
+          </div>
+          <div class="calc-field">
+            <label for="se-exp">Business expenses</label>
+            <div class="money-input"><span>$</span><input type="text" id="se-exp" inputmode="numeric" value="20,000"></div>
+          </div>
+          <div class="calc-field">
+            <label for="se-year">Tax year</label>
+            <select id="se-year" class="select"><option value="2026">2026</option><option value="2025">2025</option></select>
+          </div>
+          <div class="info-note"><strong>GST/HST:</strong> <span id="se-gst"></span></div>
+        </form>
+        <div class="calc-output">
+          <div class="result-hero">
+            <span class="result-label">Set aside about</span>
+            <div class="result-big" id="se-setaside">0%</div>
+            <div class="result-mo">of net income for tax + CPP</div>
+          </div>
+          <div class="result-rows">
+            <div class="rr"><span>Net self‑employment income</span><b id="se-net-income">$0</b></div>
+            <div class="rr"><span>Income tax (fed + AB)</span><b id="se-incometax">$0</b></div>
+            <div class="rr"><span>CPP (both portions)</span><b id="se-cpp">$0</b></div>
+            <div class="rr total"><span>Total to set aside</span><b id="se-total">$0</b></div>
+            <div class="rr"><span>Income after tax &amp; CPP</span><b id="se-aftertax">$0</b></div>
+          </div>
+          <p class="disclaimer">Self‑employed Albertans pay both employee &amp; employer CPP. Quarterly instalments may be required.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. GST -->
+    <div class="calc-panel" id="calc-gst" role="tabpanel" aria-labelledby="tab-gst" hidden>
+      <div class="calc-shell">
+        <form class="calc-inputs" onsubmit="return false">
+          <h2 class="calc-h">GST calculator</h2>
+          <p class="calc-sub">Alberta charges 5% GST — no provincial sales tax.</p>
+          <div class="calc-field">
+            <label for="gst-amt">Amount</label>
+            <div class="money-input"><span>$</span><input type="text" id="gst-amt" inputmode="decimal" value="100.00"></div>
+          </div>
+          <div class="calc-field">
+            <label>Calculation</label>
+            <div class="radio-row">
+              <label class="radio-pill"><input type="radio" name="gst-mode" value="add" checked> Add 5% GST</label>
+              <label class="radio-pill"><input type="radio" name="gst-mode" value="remove"> Remove GST from total</label>
+            </div>
+          </div>
+          <p class="disclaimer">Alberta is the only province with no PST/HST — just the 5% federal GST.</p>
+        </form>
+        <div class="calc-output">
+          <div class="result-rows" style="margin-top:0">
+            <div class="rr"><span>Amount before GST</span><b id="gst-base">$0.00</b></div>
+            <div class="rr"><span>GST (5%)</span><b id="gst-gst">$0.00</b></div>
+            <div class="rr total"><span>Total with GST</span><b id="gst-total">$0.00</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MARGINAL -->
+    <div class="calc-panel" id="calc-marginal" role="tabpanel" aria-labelledby="tab-marginal" hidden>
+      <div class="calc-shell wide">
+        <form class="calc-inputs" onsubmit="return false">
+          <h2 class="calc-h">Marginal rate lookup</h2>
+          <p class="calc-sub">See every combined Alberta + federal bracket and where you land.</p>
+          <div class="calc-field">
+            <label for="mr-income">Taxable income</label>
+            <div class="money-input"><span>$</span><input type="text" id="mr-income" inputmode="numeric" value="120,000"></div>
+          </div>
+          <div class="calc-field">
+            <label for="mr-year">Tax year</label>
+            <select id="mr-year" class="select"><option value="2026">2026</option><option value="2025">2025</option></select>
+          </div>
+          <div class="result-meta" style="margin-top:1.2rem">
+            <div><span>Your marginal rate</span><b id="mr-marg">0%</b></div>
+            <div><span>Average tax rate</span><b id="mr-avg">0%</b></div>
+            <div><span>Est. income tax</span><b id="mr-tax">$0</b></div>
+          </div>
+        </form>
+        <div class="calc-output nopad">
+          <div class="table-wrap" style="box-shadow:none;border:none">
+            <table class="tax-table">
+              <thead><tr><th>Taxable income</th><th class="num">Federal</th><th class="num">Alberta</th><th class="num">Combined</th><th></th></tr></thead>
+              <tbody id="mr-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="global-disclaimer">These calculators provide general estimates using published 2025 &amp; 2026 Alberta and federal rates. They apply the basic personal amount but not every credit or special situation, and shouldn't be relied on for filing. For an exact figure, <a href="contact.html">get in touch</a> — it's what we do best.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-pad-sm">
+    <div class="wrap">
+      <div class="cta-band-sm">
+        <h2 class="mb-0">Like the estimate? The real refund is usually better.</h2>
+        <a class="btn btn-gold btn-lg" href="contact.html">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<style>
+  .page-hero { padding: clamp(40px, 6vw, 72px) 0 clamp(28px, 4vw, 44px); }
+  .crumbs { font-size: .84rem; color: var(--muted); margin-bottom: 1rem; display: flex; gap: .5em; }
+  .crumbs span { opacity: .5; }
+
+  .calc-tabs { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: 4px; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; }
+  .calc-tab { flex-shrink: 0; background: none; border: none; border-bottom: 2px solid transparent; font-family: var(--sans); font-size: .96rem; font-weight: 600; color: var(--muted); padding: .8em 1.1em; cursor: pointer; white-space: nowrap; transition: all .18s; }
+  .calc-tab:hover { color: var(--ink); }
+  .calc-tab.active { color: var(--teal-800); border-bottom-color: var(--teal-700); }
+
+  .calc-panel { margin-top: 2.2rem; }
+  .calc-shell { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(20px, 3vw, 40px); align-items: start; }
+  .calc-shell.wide { grid-template-columns: .8fr 1.5fr; }
+  @media (max-width: 820px) { .calc-shell, .calc-shell.wide { grid-template-columns: 1fr; } }
+
+  .calc-inputs { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow-sm); }
+  .calc-h { font-size: 1.5rem; margin-bottom: .2rem; }
+  .calc-sub { color: var(--muted); font-size: .92rem; margin-bottom: 1.6rem; }
+  .calc-field { margin-bottom: 1.3rem; }
+  .calc-field > label { display: block; font-size: .86rem; font-weight: 600; color: var(--ink-soft); margin-bottom: .5rem; }
+  .field-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 460px) { .field-2 { grid-template-columns: 1fr; } }
+  .money-input { display: flex; align-items: center; gap: .3rem; border: 1.5px solid var(--line); border-radius: var(--r-sm); padding: .6rem .85rem; font-size: 1.25rem; font-weight: 700; font-family: var(--serif); transition: border-color .2s; }
+  .money-input:focus-within { border-color: var(--teal-600); }
+  .money-input span { color: var(--muted); }
+  .money-input input { border: none; outline: none; font: inherit; width: 100%; background: transparent; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .slider { width: 100%; margin-top: .9rem; accent-color: var(--teal-700); }
+  .select { width: 100%; padding: .7rem .85rem; border: 1.5px solid var(--line); border-radius: var(--r-sm); font: inherit; font-weight: 600; background: var(--card); color: var(--ink); cursor: pointer; }
+  .calc-check { display: flex; align-items: center; gap: .6em; font-size: .9rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; }
+  .calc-check input { width: 18px; height: 18px; accent-color: var(--teal-700); }
+  .radio-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .radio-pill { display: inline-flex; align-items: center; gap: .5em; border: 1.5px solid var(--line); border-radius: 100px; padding: .5em 1em; font-size: .88rem; font-weight: 600; cursor: pointer; color: var(--ink-soft); }
+  .radio-pill input { accent-color: var(--teal-700); }
+  .info-note, .warn-note { font-size: .88rem; line-height: 1.5; border-radius: var(--r-sm); padding: .8rem 1rem; margin-top: .4rem; }
+  .info-note { background: var(--teal-50); color: var(--teal-900); }
+  .warn-note { background: oklch(0.96 0.04 70); color: oklch(0.48 0.11 55); display: flex; gap: .5em; }
+
+  .calc-output { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow-md); }
+  .calc-output.nopad { padding: 0; overflow: hidden; }
+  .result-hero { text-align: center; padding: 1.2rem 1rem 1.6rem; background: linear-gradient(180deg, var(--teal-50), transparent); border-radius: var(--r-md); margin-bottom: 1.4rem; }
+  .result-hero.gold { background: linear-gradient(180deg, var(--gold-100), transparent); }
+  .result-label { font-size: .82rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .result-big { font-family: var(--serif); font-weight: 800; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1.05; color: var(--teal-800); letter-spacing: -.02em; margin: .3rem 0 .2rem; font-variant-numeric: tabular-nums; }
+  .result-hero.gold .result-big { color: var(--gold-600); }
+  .result-mo { font-size: .92rem; color: var(--muted); font-weight: 500; }
+  .result-bar { display: flex; height: 14px; border-radius: 100px; overflow: hidden; background: var(--line); margin-bottom: 1.4rem; }
+  .result-bar span { transition: flex .3s ease; }
+  .result-rows { display: flex; flex-direction: column; }
+  .rr { display: flex; justify-content: space-between; align-items: center; padding: .7rem 0; border-bottom: 1px solid var(--line-soft); font-size: .95rem; }
+  .rr span { color: var(--ink-soft); } .rr b { font-variant-numeric: tabular-nums; font-size: 1.02rem; }
+  .rr.total { border-bottom: none; border-top: 2px solid var(--line); margin-top: .2rem; padding-top: .9rem; font-weight: 700; }
+  .rr.total span { color: var(--ink); font-weight: 700; } .rr.total b { color: var(--teal-800); font-size: 1.15rem; }
+  .result-meta { display: flex; gap: 1.5rem; margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
+  .result-meta div { display: flex; flex-direction: column; gap: 3px; }
+  .result-meta span { font-size: .78rem; color: var(--muted); } .result-meta b { font-size: 1.3rem; color: var(--ink); font-family: var(--serif); font-variant-numeric: tabular-nums; }
+  table.tax-table tr.here { background: var(--gold-100) !important; }
+  table.tax-table tr.here td { font-weight: 700; }
+
+  .global-disclaimer { font-size: .85rem; color: var(--muted); line-height: 1.6; max-width: 760px; margin: 2.6rem auto 0; text-align: center; }
+  .cta-band-sm { background: var(--ink); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 44px); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .cta-band-sm h2 { color: #fff; font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+</style>
+
+<script src="js/tax-data.js"></script>
+<script src="js/calculators.js"></script>
+<script src="js/partials.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Access Denied (401) | Diamond Tax & Accounting</title>
-<meta name="description" content="You need to be authorized to view this page. Return to the Diamond Tax & Accounting homepage or contact us for help.">
-<meta name="robots" content="noindex, nofollow">
+<title>Page Not Found (404) | Diamond Tax & Accounting</title>
+<meta name="description" content="The page you're looking for can't be found. Explore Diamond Tax & Accounting's services, calculators and Alberta tax guide, or get in touch.">
+<meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#1a5854">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -33,21 +33,21 @@
           <polygon points="60,46 90,46 60,104" fill="#164e4a"/>
           <polygon points="51,46 69,46 60,74" fill="#2f8a83"/>
         </svg>
-        <span class="error-code">1</span>
+        <span class="error-code">4</span>
       </div>
-      <span class="badge gold" style="margin-bottom:1rem">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-        Restricted area
-      </span>
-      <h1>You don't have access to this page</h1>
-      <p class="lede maxw-680 mx-auto">This page requires authorization, or your session may have expired. If you believe you should have access, get in touch and we'll sort it out quickly.</p>
+      <span class="kicker" style="justify-content:center">Lost a page?</span>
+      <h1>This page slipped through the cracks</h1>
+      <p class="lede maxw-680 mx-auto">The page you're looking for doesn't exist or may have moved. Let's get you back to something useful — like figuring out your refund.</p>
       <div class="error-cta">
         <a class="btn btn-primary btn-lg" href="index.html">Back to home</a>
         <a class="btn btn-outline btn-lg" href="contact.html">Contact us</a>
       </div>
 
-      <div class="error-help">
-        <p class="mb-0">Need a hand? Call <a href="tel:+15875578400">(587) 557‑8400</a> or email <a href="mailto:hello@diamondtax.ca">hello@diamondtax.ca</a> — we're open 7 days a week, 8 AM–9 PM.</p>
+      <div class="error-links">
+        <a href="services.html" class="error-link"><span>Services</span><small>Personal, business &amp; corporate tax</small></a>
+        <a href="calculators.html" class="error-link"><span>Tax Calculators</span><small>Estimate your take‑home &amp; refund</small></a>
+        <a href="tax-guide.html" class="error-link"><span>Alberta Tax Guide</span><small>2026 rates, changes &amp; history</small></a>
+        <a href="blog.html" class="error-link"><span>Blog &amp; Tips</span><small>Plain‑language tax guidance</small></a>
       </div>
     </div>
   </section>
@@ -62,9 +62,12 @@
   .error-code { font-family: var(--serif); font-weight: 800; font-size: clamp(5rem, 16vw, 9rem); line-height: 1; color: var(--teal-800); letter-spacing: -.04em; }
   .error-diamond { width: clamp(4.6rem, 15vw, 8.4rem); height: clamp(4.6rem, 15vw, 8.4rem); margin: 0 -.05em; }
   .error-cta { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; margin: 1.8rem 0 0; }
-  .error-help { margin-top: 2.4rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.2rem 1.5rem; box-shadow: var(--shadow-sm); }
-  .error-help p { font-size: .98rem; color: var(--ink-soft); }
-  .error-help a { font-weight: 600; }
+  .error-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.8rem; text-align: left; }
+  @media (max-width: 560px) { .error-links { grid-template-columns: 1fr; } }
+  .error-link { display: flex; flex-direction: column; gap: .15rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.1rem 1.3rem; box-shadow: var(--shadow-sm); transition: all .2s; color: inherit; }
+  .error-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--teal-100); color: inherit; }
+  .error-link span { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; color: var(--teal-800); }
+  .error-link small { color: var(--muted); font-size: .86rem; }
 </style>
 
 <script src="js/partials.js"></script>
